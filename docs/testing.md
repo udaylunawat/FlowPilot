@@ -97,3 +97,13 @@ Use low-risk pages and avoid login/signup/account flows:
 - A public documentation site: search or click navigation links.
 - A public contact/demo form that does not submit sensitive data.
 - Local static fixture pages for repeated regression tests.
+
+## Chrome Extension Smoke
+
+1. Start the backend on `8000`.
+2. Load `extensions/chrome` as an unpacked Chrome extension.
+3. Open `http://localhost:8000/fixtures/react-site/`.
+4. Confirm the bottom-right `Chat` button appears.
+5. Run `inspect`, `click Support`, `fill the form`, and `click Review request`.
+6. Open the extension popup, change the backend URL if using a non-default port,
+   save, and reload the page.

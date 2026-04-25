@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "FlowPilot Local Assistant",
+  "description": "Injects the FlowPilot chat widget into pages and connects it to a local FlowPilot backend.",
+  "version": "0.1.0",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "http://127.0.0.1:*/*",
+    "http://localhost:*/*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_title": "FlowPilot",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js", "widget.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -125,6 +125,52 @@ simple first: save the HTML locally, preserve visible links/forms, and use
 FlowPilot to validate navigation, form discovery, HITL corrections, and
 selector reuse before trying a full mirrored asset copy.
 
+## Chrome Extension
+
+The minimal unpacked Chrome extension lives in `extensions/chrome/`. It injects
+the same bottom-right FlowPilot widget into ordinary `http` and `https` pages
+and sends chat/feedback requests to your local backend.
+
+Start FlowPilot first:
+
+```bash
+uv run uvicorn ui_bot.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Load the extension:
+
+1. Open `chrome://extensions`.
+2. Enable `Developer mode`.
+3. Click `Load unpacked`.
+4. Select the repo folder `extensions/chrome`.
+5. Open any test page and reload it.
+
+The extension defaults to `http://127.0.0.1:8000`. If your server is running on
+another port, open the FlowPilot extension popup, change `Local backend URL`,
+click `Save`, and reload the page.
+
+Suggested extension test pages:
+
+```text
+http://localhost:8000/fixtures/react-site/
+https://example.com
+https://httpbin.org/forms/post
+```
+
+Suggested commands:
+
+```text
+inspect
+click Support
+fill the form
+scroll down
+go back
+```
+
+Some production sites block extension-like behavior, cross-origin requests, or
+speech recognition. For those, start with the local fixture and then test real
+sites one at a time.
+
 ## Docker
 
 ```bash
