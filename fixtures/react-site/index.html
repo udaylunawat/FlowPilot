@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React Site Fixture</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+          BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #17202a;
+        background: #f5f7fb;
+      }
+      body { margin: 0; }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: flex;
+        gap: 18px;
+        align-items: center;
+        padding: 14px 32px;
+        border-bottom: 1px solid #d8dee4;
+        background: #ffffff;
+      }
+      nav { display: flex; gap: 12px; flex-wrap: wrap; }
+      a { color: #0969da; text-decoration: none; }
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 36px 24px 90px;
+      }
+      section {
+        padding: 28px 0;
+        border-bottom: 1px solid #d8dee4;
+      }
+      h1 { font-size: 40px; margin: 0 0 12px; }
+      h2 { margin: 0 0 14px; }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+      }
+      .panel {
+        padding: 16px;
+        border: 1px solid #d8dee4;
+        border-radius: 8px;
+        background: #ffffff;
+      }
+      form {
+        display: grid;
+        gap: 14px;
+        max-width: 520px;
+      }
+      label { display: grid; gap: 6px; font-weight: 600; }
+      input, textarea, select, button {
+        font: inherit;
+        padding: 10px 12px;
+        border: 1px solid #b7c0ca;
+        border-radius: 6px;
+      }
+      textarea { min-height: 96px; resize: vertical; }
+      button {
+        width: fit-content;
+        color: #ffffff;
+        border-color: #087ea4;
+        background: #087ea4;
+        cursor: pointer;
+      }
+      .inline { display: flex; gap: 10px; align-items: center; }
+      .inline input { width: auto; }
+      #status {
+        min-height: 24px;
+        margin-top: 12px;
+        color: #1a7f37;
+        font-weight: 650;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>React Fixture</strong>
+      <nav aria-label="Primary">
+        <a href="#docs">Docs</a>
+        <a href="#examples">Examples</a>
+        <a href="#support">Support</a>
+        <a href="/fixtures/react-site/react-dev-home.html">Downloaded react.dev HTML</a>
+      </nav>
+    </header>
+    <main>
+      <section id="home">
+        <h1>React-style product site</h1>
+        <p>
+          This fixture is based on a downloaded React website target and adds
+          deterministic local navigation and forms for UI Bot testing.
+        </p>
+        <form id="search-form">
+          <label>
+            Search docs
+            <input name="query" type="search" placeholder="Search components">
+          </label>
+          <button type="button" id="search-button">Search</button>
+        </form>
+        <div id="search-status" aria-live="polite"></div>
+      </section>
+
+      <section id="docs">
+        <h2>Docs</h2>
+        <div class="grid">
+          <article class="panel">
+            <h3>Components</h3>
+            <p>Practice clicking cards and links.</p>
+            <a href="#support">Ask for implementation help</a>
+          </article>
+          <article class="panel">
+            <h3>Hooks</h3>
+            <p>Use page navigation, scroll, and back workflows.</p>
+            <a href="#examples">View examples</a>
+          </article>
+        </div>
+      </section>
+
+      <section id="examples">
+        <h2>Examples</h2>
+        <p>Scroll here, go back, or navigate to support using the bot.</p>
+        <button type="button" id="preview-button">Preview example</button>
+        <div id="preview-status" aria-live="polite"></div>
+      </section>
+
+      <section id="support">
+        <h2>Support request</h2>
+        <form id="support-form">
+          <label>
+            Name
+            <input name="name" autocomplete="name" required>
+          </label>
+          <label>
+            Email
+            <input name="email" type="email" autocomplete="email" required>
+          </label>
+          <label>
+            Topic
+            <select name="topic" required>
+              <option value="">Choose a topic</option>
+              <option>Components</option>
+              <option>Hooks</option>
+              <option>Deployment</option>
+            </select>
+          </label>
+          <label>
+            Message
+            <textarea name="message" required></textarea>
+          </label>
+          <label class="inline">
+            <input name="updates" type="checkbox">
+            Send me updates
+          </label>
+          <button type="button" id="review-button">Review request</button>
+          <div id="status" aria-live="polite"></div>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      document.getElementById("search-button").addEventListener("click", () => {
+        const query = document.querySelector("input[name=query]").value || "all docs";
+        document.getElementById("search-status").textContent =
+          `Showing local fixture results for ${query}`;
+      });
+      document.getElementById("preview-button").addEventListener("click", () => {
+        document.getElementById("preview-status").textContent =
+          "Preview opened in the examples section.";
+      });
+      document.getElementById("review-button").addEventListener("click", () => {
+        document.getElementById("status").textContent =
+          "Draft reviewed. The form was not submitted.";
+      });
+    </script>
+    <script
+      src="/static/widget.js"
+      data-api-base="http://127.0.0.1:8001"
+    ></script>
+  </body>
+</html>

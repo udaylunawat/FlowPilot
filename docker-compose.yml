@@ -1,0 +1,14 @@
+services:
+  ui-bot:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      UI_BOT_DATABASE_PATH: /app/data/ui_bot.sqlite3
+    volumes:
+      - ui_bot_data:/app/data
+
+volumes:
+  ui_bot_data:
